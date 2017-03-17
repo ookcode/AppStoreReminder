@@ -58,10 +58,10 @@ class Client():
 	#################################
 	def search_app(self, keyword, country, max_count):
 		# keyword = urllib.parse.urlencode(keyword)
-		response = self.session.get('https://itunes.apple.com/search?term={}&country={}&media=software'.format(keyword, country))
+		response = self.session.get('https://itunes.apple.com/search?term={}&country={}&media=software&limit={}'.format(keyword, country, max_count))
 		data = json.loads(response.content.decode('utf-8'))
 		try:
-			return data['results'][:max_count]
+			return data['results']
 		except Exception as e:
 			if 'errorMessage' in data:
 				print('errorMessage', data['errorMessage'])
