@@ -11,7 +11,7 @@ import api
 
 def main():
 	root_path = os.path.dirname(os.path.realpath(sys.argv[0]))
-	cache_path = os.path.join(root_path, "handler.cache")
+	cache_path = os.path.join(root_path, "handler.json")
 	f = None
 	try:
 		f = open(cache_path, 'r')
@@ -24,9 +24,9 @@ def main():
 	client = api.Client()
 	print("America = us, China = cn, Japan = jp ...")
 	print("-" * 60)
-	while True:
-		country = input("please choose country: ")
-		country = country.strip()
+	country = input("please choose country: ")
+	country = country.strip()
+	while True:	
 		keywords = input("please input app name to search: ")
 		print("searching...")
 		data = client.search_app(keywords, country, 10)
@@ -49,14 +49,16 @@ def main():
 			select_index = int(select)
 			select_item = data[select_index]
 			save_data = {}
+			save_data['trackName'] = select_item['trackName']
 			save_data['trackId'] = select_item['trackId']
 			save_data['version'] = select_item['version']
 			save_data['price'] = select_item['price']
 			save_data['available'] = True
 			save_data['country'] = country
 			cache_list.append(save_data)
-			f = open(cache_path, 'w')
-			f.write(json.dumps(cache_list))
+			content = json.dumps(cache_list, indent=4, sort_keys=True, ensure_ascii=False)
+			f = open(cache_path, 'w', encoding='utf-8')
+			f.write(content)
 			f.close()
 			print("{} save finished, you can run handler_app.py to handle app changes\n\n".format(select_item['trackId']))
 		except Exception as e:

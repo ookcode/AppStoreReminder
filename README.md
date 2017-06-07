@@ -19,9 +19,8 @@
 
 * 运行handler_app.py
   运行一次刷新一次监听列表中的app，发现变化邮件通知
-  推荐先本地运行一次检测邮件连接情况，之后加入定时任务中指定频率刷新即可
+  推荐加入定时任务（linux crontab命令）中指定频率运行
+
 ## 注意事项
 * 发件邮箱必须开始smtp服务
 * 由于QQ邮箱升级，无法使用QQ密码登陆，需生成授权码。[详情戳这里](http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256)
-
-本项目同时托管在[Github.com](https://github.com/ookcode/AppStoreReminder)与[Coding.net](https://coding.net/u/ookcode/p/AppStoreReminder/git)中
