@@ -14,7 +14,7 @@ def main():
 	cache_path = os.path.join(root_path, "handler.json")
 	f = None
 	try:
-		f = open(cache_path, 'r')
+		f = open(cache_path, 'r', encoding='utf-8')
 		cache_list = json.loads(f.read())
 	except Exception as e:
 		cache_list = []

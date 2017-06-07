@@ -8,7 +8,9 @@
 #	* app come back to appstore
 #	* app cut price
 #	* app get a new version
-#	please add this script to crontab
+#	please add this script to crontab:
+# 	LC_CTYPE="en_US.UTF-8"
+#	0 */1 * * * /usr/local/bin/python3  ~/AppStoreReminder/handler_app.py >> ~/handler_app.log
 #
 ############################################################
 import os,sys
@@ -21,7 +23,6 @@ def main():
 	root_path = os.path.dirname(os.path.realpath(sys.argv[0]))
 	cache_path = os.path.join(root_path, "handler.json")
 	config_path = os.path.join(root_path, "config.ini")
-
 	# read cache file
 	f = None
 	try:
@@ -113,8 +114,9 @@ def main():
 			if not has_change:
 				print(now_time, trackName, "has not changed")
 
-	f = open(cache_path, 'w')
-	f.write(json.dumps(cache_list))
+	content = json.dumps(cache_list, indent=4, sort_keys=True, ensure_ascii=False)
+	f = open(cache_path, 'w', encoding='utf-8')
+	f.write(content)
 	f.close()
 
 if __name__ == '__main__':
