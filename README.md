@@ -1,26 +1,29 @@
 # App Store Reminder
-## 简介
-喜欢的app降价了？更新了？下架了又或者重新上架了？
-脚本一键监听，邮件提醒，就这么点功能。
-## 使用说明
-* 修改config.ini配置邮箱
+[中文版本](https://github.com/ookcode/AppStoreReminder/blob/master/README_zh.md)
+## Introduction
+Did you want to get a notification when your favorite apps cut price,updated,or out off the shelf in the appstore?
+This Script Help you to monitor these apps.
+
+## Instructions for use
+* edit config.ini
 ```javascript
   {
-    "sender": "",   //请填入发件的邮箱号
-    "password": "", //请填入发件的邮箱密码
-    "receiver": "", //请填入收件的邮箱号
-    "app_lost_mail": true,      //app下架上架推送开关
-    "app_update_mail": true,    //app更新推送开关
-    "app_cut_price_mail": true  //app降价推送开关
+    "sender": "",   // please enter a sender e-mail address
+    "password": "", // please enter a sender e-mail password
+    "receiver": "", // please enter a receiver e-mail address
+    "app_lost_mail": true,      // app avaible push switch
+    "app_update_mail": true,    // app update push switch
+    "app_cut_price_mail": true  // app price push switch
   }
 ```
-* 运行search_app.py
-  输入app的名称搜索app并加入监听列表
+* search_app.py
+  `$python search_app.py`
+  Enter the name of the app to search for the app and then add it to the listeners
 
-* 运行handler_app.py
-  运行一次刷新一次监听列表中的app，发现变化邮件通知
-  推荐加入定时任务（linux crontab命令）中指定频率运行
+* handler_app.py
+  `$python handler_app.py`
+  Each run will traverse the list of listeners and mail you the change.
+  I recommended you join the script to the scheduler (linux crontab command) to make a frequency operation
 
-## 注意事项
-* 发件邮箱必须开始smtp服务
-* 由于QQ邮箱升级，无法使用QQ密码登陆，需生成授权码。[详情戳这里](http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256)
+## Precautions
+* Sender E-mail must open smtp service
