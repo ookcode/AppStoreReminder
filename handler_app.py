@@ -93,17 +93,17 @@ def main():
 					client.send_email(sender, password, receiver, mail_title, content)
 
 			elif new_item['price'] != item['price']:
-				# app cut prices
+				# app price changed
 				has_change = True
-				content = "{} {} cut prices, hurry to buy!".format(now_time, new_item['trackName'])
+				content = "{} {} price changed {} -> {}".format(now_time, new_item['trackName'], item['price'], new_item['price'])
 				print(content)
 				if allow_email and app_cut_price_mail == True:
 					client.send_email(sender, password, receiver, mail_title, content)
 
-			elif new_item['version'] < item['version']:
-				# app get a new version
+			elif new_item['version'] != item['version']:
+				# app version changed
 				has_change = True
-				content = "{} {} got new version!".format(now_time, new_item['trackName'])
+				content = "{} {} version changed {} -> {}".format(now_time, new_item['trackName'], item['version'], new_item['version'])
 				print(content)
 				if allow_email and app_update_mail == True:
 					client.send_email(sender, password, receiver, mail_title, content)
@@ -112,7 +112,7 @@ def main():
 				item[key] = new_item[key]
 
 			if not has_change:
-				print(now_time, trackName, "has not changed")
+				print(now_time, trackName, "no change")
 
 	content = json.dumps(cache_list, indent=4, sort_keys=True, ensure_ascii=False)
 	f = open(cache_path, 'w', encoding='utf-8')
